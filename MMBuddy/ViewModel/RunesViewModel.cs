@@ -62,7 +62,21 @@ namespace MMBuddy.ViewModel
             this._runePages.Add(currentRunePage);
 
             // Make it selected while we're at it, why not.
-            this._selectedRunePage = currentRunePage;
+            this.SelectedRunePage = currentRunePage;
+        }
+
+        /// <summary>
+        /// Saves all rune pages
+        /// </summary>
+        public async void SaveAllRunePages()
+        {
+            if(this._runes.SaveAllRunePages(this._runePages))
+            {
+                await this._dialogCoordinator.ShowMessageAsync(this, "Success", "Runes have been successfully saved");
+                return;
+            }
+
+            await this._dialogCoordinator.ShowMessageAsync(this, "Failure", "There has been a problem saving runes");
         }
 
         /// <summary>

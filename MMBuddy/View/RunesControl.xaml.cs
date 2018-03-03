@@ -50,5 +50,15 @@ namespace MMBuddy.View
         {
             this._runesViewModel.SaveCurrentRunePage();
         }
+
+        private void DeleteCurrentPage_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void SaveAllRunePages_Click(object sender, RoutedEventArgs e)
+        {
+            this._runesViewModel.SaveAllRunePages();
+        }
     }
 }

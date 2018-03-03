@@ -2,6 +2,7 @@
 using MMBuddy.Services;
 using MMBuddy.Dtos;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace MMBuddy.Model
 {
@@ -56,6 +57,15 @@ namespace MMBuddy.Model
         public List<RunePage> GetSavedRunePages()
         {
             return this._preferences.Data;
+        }
+
+        /// <summary>
+        /// Saves all rune pages.
+        /// </summary>
+        /// <returns></returns>
+        public bool SaveAllRunePages(ObservableCollection<RunePage> RunePages)
+        {
+            return this._preferences.Update(new List<RunePage>(RunePages));
         }
     }
 }
