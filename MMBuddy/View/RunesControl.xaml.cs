@@ -53,7 +53,7 @@ namespace MMBuddy.View
 
         private void DeleteCurrentPage_Click(object sender, RoutedEventArgs e)
         {
-
+            this._runesViewModel.DeleteCurrentPage();
         }
 
         private void SaveAllRunePages_Click(object sender, RoutedEventArgs e)

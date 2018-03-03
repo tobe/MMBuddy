@@ -17,7 +17,7 @@ namespace MMBuddy.ViewModel
         private IDialogCoordinator _dialogCoordinator;
         private readonly Runes _runes;
 
-        // Collection of available rune pages
+        // Collection of available rune pages (local)
         private ObservableCollection<RunePage> _runePages = new ObservableCollection<RunePage>();
         public ObservableCollection<RunePage> RunePages
         {
@@ -28,6 +28,8 @@ namespace MMBuddy.ViewModel
                 RaisePropertyChangedEvent(nameof(RunePages));
             }
         }
+
+        // Currently selected rune page (local)
         private RunePage _selectedRunePage;
         public RunePage SelectedRunePage
         {
@@ -51,6 +53,18 @@ namespace MMBuddy.ViewModel
             // Load rune pages from the file (if any)
             if(this._runes.RunePagesExist())
                 this._runePages = new ObservableCollection<RunePage>(this._runes.GetSavedRunePages());
+        }
+
+        /// <summary>
+        /// Removes a currently selected rune page.
+        /// </summary>
+        public void DeleteCurrentPage()
+        {
+            this._runePages.Remove(this._selectedRunePage);
+
+            // Select the first one if applicable
+            if (this._runePages.Count > 0)
+                this.SelectedRunePage = this._runePages[0];
         }
 
         /// <summary>
