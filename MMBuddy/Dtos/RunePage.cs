@@ -2,11 +2,11 @@
 {
     public class RunePage
     {
-        public bool current { get; set; }
-        public bool isActive { get; set; }
-        public string name { get; set; }
-        public int primaryStyleId { get; set; }
-        public int subStyleId { get; set; }
-        public int[] selectedPerkIds { get; set; }
+        public bool Current { get; set; }
+        public bool IsActive { get; set; }
+        public string Name { get; set; }
+        public int PrimaryStyleId { get; set; }
+        public int SubStyleId { get; set; }
+        public int[] SelectedPerkIds { get; set; }
     }
 }

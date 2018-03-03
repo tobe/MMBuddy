@@ -21,5 +21,6 @@
     
     <Grid>
         <TextBlock>This is a TextBlock</TextBlock>
+        <Button x:Name="Testing" Click="Testing_Click" Width="auto">Testing</Button>
     </Grid>
 </UserControl>

@@ -45,5 +45,10 @@ namespace MMBuddy.View
         {
             await this._runesViewModel.ShowStartupDialogAsync();
         }
+
+        private void Testing_Click(object sender, RoutedEventArgs e)
+        {
+            this._runesViewModel.Testing();
+        }
     }
 }

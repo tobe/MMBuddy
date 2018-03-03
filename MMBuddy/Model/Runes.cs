@@ -33,5 +33,14 @@ namespace MMBuddy.Model
         {
             this._serverInfo = LeagueProcess.Initialize();
         }
+
+        /// <summary>
+        /// Returns the current rune page.
+        /// </summary>
+        /// <returns></returns>
+        public async Task<RunePage> GetCurrentRunePageAsync()
+        {
+            return await ApiClient.GetCurrentRunePage();
+        }
     }
 }
