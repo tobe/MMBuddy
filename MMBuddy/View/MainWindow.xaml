@@ -1,0 +1,28 @@
+﻿<Controls:MetroWindow x:Class="MMBuddy.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        xmlns:local="clr-namespace:MMBuddy"
+        mc:Ignorable="d"
+        Title="Matchmaking Buddy" Height="400" Width="700"
+        
+        BorderThickness="1" 
+        BorderBrush="{DynamicResource AccentColorBrush}"
+
+        WindowTransitionsEnabled="True"
+        WindowStartupLocation="CenterScreen"
+                      
+        xmlns:View="clr-namespace:MMBuddy.View"
+        xmlns:ViewModel="clr-namespace:MMBuddy.ViewModel">
+
+    <Grid>
+        <TabControl Padding="4,20,0,0">
+            <TabItem Header="Runes">
+                <!-- View = UserControl -->
+                <View:RunesControl></View:RunesControl>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Controls:MetroWindow>
