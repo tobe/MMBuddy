@@ -76,6 +76,7 @@
     <Compile Include="Model\Runes.cs" />
     <Compile Include="Services\ApiClient.cs" />
     <Compile Include="Services\LeagueProcess.cs" />
+    <Compile Include="Services\Preferences.cs" />
     <Compile Include="ViewModel\ObservableObject.cs" />
     <Compile Include="ViewModel\RunesViewModel.cs" />
     <Compile Include="View\MainWindow.cs" />

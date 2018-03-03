@@ -18,20 +18,57 @@ namespace MMBuddy.ViewModel
         private readonly Runes _runes;
 
         // Collection of available rune pages
-        private readonly ObservableCollection<RunePage> _runePages = new ObservableCollection<RunePage>();
+        private ObservableCollection<RunePage> _runePages = new ObservableCollection<RunePage>();
+        public ObservableCollection<RunePage> RunePages
+        {
+            get { return this._runePages; }
+            set
+            {
+                _runePages = value;
+                RaisePropertyChangedEvent(nameof(RunePages));
+            }
+        }
+        private RunePage _selectedRunePage;
+        public RunePage SelectedRunePage
+        {
+            get { return this._selectedRunePage; }
+            set
+            {
+                _selectedRunePage = value;
+                RaisePropertyChangedEvent(nameof(SelectedRunePage));
+            }
+        }
 
+        /// <summary>
+        /// Initializes the runes model and gets available runepages.
+        /// </summary>
+        /// <param name="DialogCoordinator"></param>
         public RunesViewModel(IDialogCoordinator DialogCoordinator)
         {
             this._dialogCoordinator = DialogCoordinator;
             this._runes = new Runes();
+
+            // Load rune pages from the file (if any)
+            if(this._runes.RunePagesExist())
+                this._runePages = new ObservableCollection<RunePage>(this._runes.GetSavedRunePages());
         }
 
-        public async void Testing()
+        /// <summary>
+        /// Saves the current rune page into the Observable Collection. 
+        /// </summary>
+        public async void SaveCurrentRunePage()
         {
             var currentRunePage = await this._runes.GetCurrentRunePageAsync();
-            Debug.WriteLine(currentRunePage.Name);
+            this._runePages.Add(currentRunePage);
+
+            // Make it selected while we're at it, why not.
+            this._selectedRunePage = currentRunePage;
         }
 
+        /// <summary>
+        /// Shows the startup dialog and initializes the API Client.
+        /// </summary>
+        /// <returns></returns>
         public async Task ShowStartupDialogAsync()
         {
             var controller = await this._dialogCoordinator.ShowProgressAsync(this, "Please wait...", "Waiting for LeagueClientUx.exe...");

@@ -1,37 +1,34 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using MMBuddy.Services;
 using MMBuddy.Dtos;
+using System.Collections.Generic;
 
 namespace MMBuddy.Model
 {
     public class Runes
     {
-        private ServerInfo _serverInfo;
+        private readonly Preferences _preferences;
 
         public Runes()
         {
             // Try to establish a connection on construct
-            this._serverInfo = LeagueProcess.Initialize();
+            this.ServerInfo = LeagueProcess.Initialize();
+
+            // Load preferences
+            this._preferences = new Preferences();
         }
 
         /// <summary>
         /// Returns the current ServerInfo
         /// </summary>
-        public ServerInfo ServerInfo
-        {
-            get { return this._serverInfo; }
-        }
+        public ServerInfo ServerInfo { get; private set; }
 
         /// <summary>
         /// Reinitializes the connection (if League was closed, for example)
         /// </summary>
         public void ReInitialize()
         {
-            this._serverInfo = LeagueProcess.Initialize();
+            this.ServerInfo = LeagueProcess.Initialize();
         }
 
         /// <summary>
@@ -41,6 +38,24 @@ namespace MMBuddy.Model
         public async Task<RunePage> GetCurrentRunePageAsync()
         {
             return await ApiClient.GetCurrentRunePage();
+        }
+
+        /// <summary>
+        /// Returns the saved rune page count.
+        /// </summary>
+        /// <returns></returns>
+        public bool RunePagesExist()
+        {
+            return this._preferences.Data != null;
+        }
+
+        /// <summary>
+        /// Returns saved rune pages.
+        /// </summary>
+        /// <returns></returns>
+        public List<RunePage> GetSavedRunePages()
+        {
+            return this._preferences.Data;
         }
     }
 }

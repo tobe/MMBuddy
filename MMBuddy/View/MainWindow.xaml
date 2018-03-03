@@ -6,7 +6,7 @@
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         xmlns:local="clr-namespace:MMBuddy"
         mc:Ignorable="d"
-        Title="Matchmaking Buddy" Height="400" Width="700"
+        Title="Matchmaking Buddy" Height="300" Width="500"
         
         BorderThickness="1" 
         BorderBrush="{DynamicResource AccentColorBrush}"
