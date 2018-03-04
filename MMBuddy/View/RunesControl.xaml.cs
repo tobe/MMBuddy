@@ -28,6 +28,7 @@ namespace MMBuddy.View
          * Since the ViewModel ain't gonna initiate itself lol
          * */
         private readonly RunesViewModel _runesViewModel = new RunesViewModel(DialogCoordinator.Instance);
+        private static bool _controlLoaded = false;
 
         public RunesControl()
         {
@@ -43,7 +44,10 @@ namespace MMBuddy.View
         /// <param name="e"></param>
         private async void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            await this._runesViewModel.ShowStartupDialogAsync();
+            if(!_controlLoaded)
+                await this._runesViewModel.ShowStartupDialogAsync();
+
+            _controlLoaded = true;
         }
 
         private void SaveCurrentPage_Click(object sender, RoutedEventArgs e)

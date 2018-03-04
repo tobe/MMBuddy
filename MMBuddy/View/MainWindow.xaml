@@ -23,6 +23,9 @@
                 <!-- View = UserControl -->
                 <View:RunesControl></View:RunesControl>
             </TabItem>
+            <TabItem Header="Matchmaking">
+                <View:MatchmakingControl></View:MatchmakingControl>
+            </TabItem>
         </TabControl>
     </Grid>
 </Controls:MetroWindow>
