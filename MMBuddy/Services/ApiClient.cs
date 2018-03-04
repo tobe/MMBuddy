@@ -118,8 +118,10 @@ namespace MMBuddy.Services
         /// <returns></returns>
         public static StringContent AsJson(this object o)
         {
-            var serializerSettings = new JsonSerializerSettings();
-            serializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+            var serializerSettings = new JsonSerializerSettings
+            {
+                ContractResolver = new CamelCasePropertyNamesContractResolver()
+            };
             return new StringContent(JsonConvert.SerializeObject(o, serializerSettings),
                 Encoding.UTF8, "application/json");
         }
