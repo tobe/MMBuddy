@@ -23,8 +23,19 @@
                 Active
             </CheckBox>
         </DockPanel>
-        <DockPanel Grid.Row="1" Grid.Column="0">
-            
-        </DockPanel>
+        <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" Grid.Row="1" Grid.Column="0">
+            <ComboBox 
+                    MinWidth="100"
+                    Margin="0 0 10 0"
+                    ItemsSource="{Binding Champions}"
+                    SelectedItem="{Binding SelectedChampion}"
+                    DisplayMemberPath="Name">
+            </ComboBox>
+            <ComboBox
+                    MinWidth="60"
+                    ItemsSource="{Binding Lanes}"
+                    SelectedItem="{Binding SelectedLane}">
+            </ComboBox>
+        </StackPanel>
     </Grid>
 </UserControl>

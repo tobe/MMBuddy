@@ -18,7 +18,7 @@
         xmlns:ViewModel="clr-namespace:MMBuddy.ViewModel">
 
     <Grid>
-        <TabControl Padding="4,20,0,0">
+        <TabControl Padding="4,15,0,0">
             <TabItem Header="Runes">
                 <!-- View = UserControl -->
                 <View:RunesControl></View:RunesControl>

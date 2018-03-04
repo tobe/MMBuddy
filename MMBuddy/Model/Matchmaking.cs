@@ -18,6 +18,10 @@ namespace MMBuddy.Model
 
         }
 
+        /// <summary>
+        /// Returns all champions from a local JSON file.
+        /// </summary>
+        /// <returns>A List of Champions alphabetically ordered</returns>
         public List<Champion> GetAllChampions()
         {
             var path = Directory.GetCurrentDirectory() + "\\Data\\championList.json";
@@ -25,10 +29,24 @@ namespace MMBuddy.Model
 
             var championWrapperData = JsonConvert.DeserializeObject<ChampionWrapperList>(rawData);
 
-            return championWrapperData.Data.Select(c => c.Value).ToList();
+            return championWrapperData.Data.
+                Select(c => c.Value).
+                OrderBy(c => c.Name).
+                ToList();
         }
 
-        public async Task ProcessMatchmaking(CancellationToken Token)
+        /// <summary>
+        /// Processes the matchmaking, communicating with the server.
+        /// </summary>
+        /// <param name="Token">CancellationToken to cancel the async operation</param>
+        /// <param name="Champion">The picked champion to lock</param>
+        /// <param name="Lane">The lane to call</param>
+        /// <returns></returns>
+        public async Task ProcessMatchmaking(
+                CancellationToken Token,
+                Champion Champion,
+                string Lane
+            )
         {
             while(true)
             {
