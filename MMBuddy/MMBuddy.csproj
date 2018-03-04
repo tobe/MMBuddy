@@ -75,6 +75,7 @@
     <Compile Include="Dtos\Conversation.cs" />
     <Compile Include="Dtos\RunePage.cs" />
     <Compile Include="Dtos\ServerInfo.cs" />
+    <Compile Include="Dtos\Session.cs" />
     <Compile Include="Model\Matchmaking.cs" />
     <Compile Include="Model\Runes.cs" />
     <Compile Include="Services\ApiClient.cs" />

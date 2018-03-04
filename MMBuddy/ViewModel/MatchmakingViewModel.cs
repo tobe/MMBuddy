@@ -84,7 +84,9 @@ namespace MMBuddy.ViewModel
                 try
                 {
                     await this._matchmaking.ProcessMatchmaking(
-                        this._cancellationTokenSource.Token
+                        this._cancellationTokenSource.Token,
+                        this._selectedChampion,
+                        this._selectedLane
                     );
                 }catch (OperationCanceledException)
                 {
