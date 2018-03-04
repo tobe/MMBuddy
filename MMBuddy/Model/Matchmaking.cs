@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace MMBuddy.Model
@@ -25,6 +26,18 @@ namespace MMBuddy.Model
             var championWrapperData = JsonConvert.DeserializeObject<ChampionWrapperList>(rawData);
 
             return championWrapperData.Data.Select(c => c.Value).ToList();
+        }
+
+        public async Task ProcessMatchmaking(CancellationToken Token)
+        {
+            while(true)
+            {
+                Token.ThrowIfCancellationRequested();
+
+                Debug.WriteLine("hi");
+
+                await Task.Delay(200);
+            }
         }
     }
 }

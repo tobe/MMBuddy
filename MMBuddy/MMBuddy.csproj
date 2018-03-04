@@ -71,16 +71,22 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Dtos\Champion.cs" />
+    <Compile Include="Dtos\Conversation.cs" />
     <Compile Include="Dtos\RunePage.cs" />
     <Compile Include="Dtos\ServerInfo.cs" />
+    <Compile Include="Model\Matchmaking.cs" />
     <Compile Include="Model\Runes.cs" />
     <Compile Include="Services\ApiClient.cs" />
     <Compile Include="Services\LeagueProcess.cs" />
     <Compile Include="Services\Preferences.cs" />
+    <Compile Include="ViewModel\MatchmakingViewModel.cs" />
     <Compile Include="ViewModel\ObservableObject.cs" />
     <Compile Include="ViewModel\RunesViewModel.cs" />
     <Compile Include="View\MainWindow.cs" />
-    <Compile Include="View\MatchmakingControl.xaml.cs" />
+    <Compile Include="View\MatchmakingControl.xaml.cs">
+      <DependentUpon>MatchmakingControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\RunesControl.xaml.cs">
       <DependentUpon>RunesControl.xaml</DependentUpon>
     </Compile>
@@ -103,6 +109,10 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="Data\championList.json">
+      <Generator>MSBuild:Compile</Generator>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

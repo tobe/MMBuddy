@@ -1,7 +1,9 @@
 ﻿using MahApps.Metro.Controls.Dialogs;
 using MMBuddy.Dtos;
 using MMBuddy.Model;
+using System;
 using System.Collections.ObjectModel;
+using System.Threading;
 
 namespace MMBuddy.ViewModel
 {
@@ -10,6 +12,9 @@ namespace MMBuddy.ViewModel
         private IDialogCoordinator _dialogCoordinator;
         private readonly Matchmaking _matchmaking;
 
+        CancellationTokenSource _cancellationTokenSource;
+
+        // List of all champions (local JSON)
         private ObservableCollection<Champion> _champions = new ObservableCollection<Champion>();
         public ObservableCollection<Champion> Champions
         {
@@ -28,6 +33,28 @@ namespace MMBuddy.ViewModel
 
             // Read all the champions into an observable collection
             this._champions = new ObservableCollection<Champion>(this._matchmaking.GetAllChampions());
+        }
+
+        public async void MatchmakingStateChanged()
+        {
+            if(this._cancellationTokenSource == null)
+            {
+                this._cancellationTokenSource = new CancellationTokenSource();
+                try
+                {
+                    await this._matchmaking.ProcessMatchmaking(this._cancellationTokenSource.Token);
+                }catch (OperationCanceledException)
+                {
+
+                }finally
+                {
+                    this._cancellationTokenSource = null;
+                }
+            }else
+            {
+                this._cancellationTokenSource.Cancel();
+                this._cancellationTokenSource = null;
+            }
         }
     }
 }

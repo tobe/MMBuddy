@@ -31,5 +31,10 @@ namespace MMBuddy.View
 
             this.DataContext = this._matchmakingViewModel;
         }
+
+        private void MatchmakingActive_Changed(object sender, RoutedEventArgs e)
+        {
+            this._matchmakingViewModel.MatchmakingStateChanged();
+        }
     }
 }
