@@ -19,7 +19,8 @@
         <DockPanel Grid.Row="0" Grid.Column="0">
             <CheckBox x:Name="MatchmakingCheckbox"
                       Checked="MatchmakingActive_Changed"
-                      Unchecked="MatchmakingActive_Changed">
+                      Unchecked="MatchmakingActive_Changed"
+                      IsChecked="{Binding Path=MatchmakingChecked, Mode=TwoWay}">
                 Active
             </CheckBox>
         </DockPanel>

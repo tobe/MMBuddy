@@ -16,6 +16,18 @@ namespace MMBuddy.ViewModel
         // For starting / stopping background async task
         CancellationTokenSource _cancellationTokenSource;
 
+        // Checkbox
+        private bool _matchmakingChecked;
+        public bool MatchmakingChecked
+        {
+            get { return this._matchmakingChecked; }
+            set
+            {
+                this._matchmakingChecked = value;
+                RaisePropertyChangedEvent(nameof(MatchmakingChecked));
+            }
+        }
+
         // List of all champions (local JSON)
         private ObservableCollection<Champion> _champions = new ObservableCollection<Champion>();
         public ObservableCollection<Champion> Champions
@@ -88,7 +100,9 @@ namespace MMBuddy.ViewModel
                         this._selectedChampion,
                         this._selectedLane
                     );
-                }catch (OperationCanceledException)
+                    this._cancellationTokenSource = null;
+                }
+                catch (OperationCanceledException)
                 {
 
                 }finally

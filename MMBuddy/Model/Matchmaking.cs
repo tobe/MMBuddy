@@ -70,9 +70,6 @@ namespace MMBuddy.Model
                     continue;
                 }
 
-                // Send a few messages
-                //await this.CallLane(currentSession.ChatDetails.ChatRoomName, Lane);
-
                 // Hover / Lock
                 var result = await ApiClient.Hover(
                     localPlayerId,
@@ -80,20 +77,19 @@ namespace MMBuddy.Model
                     true
                 );
 
-                if (result)
-                    break;
+                // Send a few messages
+                for (int i = 0; i < 4; i++)
+                {
+                    ApiClient.SendChatMessage(currentSession.ChatDetails.ChatRoomName, Lane);
+                    await Task.Delay(100);
+                }
 
-                await Task.Delay(200);
+                if (result)
+                    return;
+
+                await Task.Delay(5000);
             }
         }
-
-        /*private async void CallLane(string ChatRoomName, string Lane)
-        {
-            for(int i = 0; i < 5; i++)
-            {
-                await ApiClient.SendChatMessage(ChatRoomName, Lane);
-            }
-        }*/
 
         /// <summary>
         /// Returns the local player ID from a matchmaking session

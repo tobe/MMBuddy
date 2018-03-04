@@ -11,6 +11,7 @@ using System.Net.Http.Headers;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace MMBuddy.Services
 {
@@ -193,6 +194,25 @@ namespace MMBuddy.Services
             response.EnsureSuccessStatusCode();
 
             return true;
+        }
+
+        public static async void SendChatMessage(string ChatRoomName, string Message)
+        {
+            // Parse the chat room name
+            ChatRoomName = ChatRoomName.Split('@')[0].ToLower();
+            ChatRoomName = HttpUtility.UrlEncode(ChatRoomName); // + & - !
+
+            HttpResponseMessage response = await _httpClient.PostAsync(
+                $"/lol-chat/v1/conversations/{ChatRoomName}/messages",
+                new
+                {
+                    body = Message
+                }.AsJson()
+            );
+
+            response.EnsureSuccessStatusCode();
+
+            return;
         }
 
         /// <summary>
