@@ -60,5 +60,10 @@ namespace MMBuddy.View
         {
             this._runesViewModel.SaveAllRunePages();
         }
+
+        private void ApplySelectedPage_Click(object sender, RoutedEventArgs e)
+        {
+            this._runesViewModel.ApplySelectedPage();
+        }
     }
 }

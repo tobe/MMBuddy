@@ -67,5 +67,15 @@ namespace MMBuddy.Model
         {
             return this._preferences.Update(new List<RunePage>(RunePages));
         }
+
+        /// <summary>
+        /// Updates a selected page serverside to new RunePage
+        /// </summary>
+        /// <param name="RunePage">The RunePage to update to</param>
+        /// <returns></returns>
+        public async Task<bool> SetCurrentRunePageAsync(RunePage RunePage)
+        {
+            return await ApiClient.SetCurrentRunePage(RunePage);
+        }
     }
 }

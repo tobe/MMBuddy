@@ -3,6 +3,7 @@
     public class RunePage
     {
         public bool Current { get; set; }
+        public int Id { get; set; }
         public bool IsActive { get; set; }
         public string Name { get; set; }
         public int PrimaryStyleId { get; set; }

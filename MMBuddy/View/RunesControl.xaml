@@ -31,26 +31,33 @@
 
         <DockPanel Grid.Row="0" Grid.Column="0">
             <Button Click="SaveCurrentPage_Click" Width="auto">Save current page</Button>
-            <Button Margin="3 0 0 0" Click="DeleteCurrentPage_Click" Width="auto">Delete current page</Button>
+            <Button Background="Crimson"
+                    Foreground="White"
+                    Margin="3 0 0 0"
+                    Click="DeleteCurrentPage_Click"
+                    Width="auto">
+                Delete current page
+            </Button>
             <Button Style="{StaticResource AccentedSquareButtonStyle}"
                     HorizontalAlignment="Right"
                     Click="SaveAllRunePages_Click"
                     Width="auto">
-                        Save all
+                Save all
             </Button>
         </DockPanel>
 
         <StackPanel
             HorizontalAlignment="Left"
-            Orientation="Horizontal"
+            Orientation="Vertical"
             Grid.Row="1"
             Grid.Column="0"
-            Margin="0 5 0 0">
+            Margin="0 25 0 0">
             <ComboBox 
                     ItemsSource="{Binding RunePages}"
                     SelectedItem="{Binding SelectedRunePage}"
                     DisplayMemberPath="Name">
             </ComboBox>
+            <Button Margin="0 25 0 0" Click="ApplySelectedPage_Click">Apply selected rune page</Button>
         </StackPanel>
     </Grid>
 </UserControl>

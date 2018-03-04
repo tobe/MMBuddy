@@ -51,8 +51,11 @@ namespace MMBuddy.ViewModel
             this._runes = new Runes();
 
             // Load rune pages from the file (if any)
-            if(this._runes.RunePagesExist())
+            if (this._runes.RunePagesExist())
+            {
                 this._runePages = new ObservableCollection<RunePage>(this._runes.GetSavedRunePages());
+                this.SelectedRunePage = this._runePages[0];
+            }
         }
 
         /// <summary>
@@ -77,6 +80,18 @@ namespace MMBuddy.ViewModel
 
             // Make it selected while we're at it, why not.
             this.SelectedRunePage = currentRunePage;
+        }
+
+        /// <summary>
+        /// Applies the selected rune page serverside.
+        /// </summary>
+        public async void ApplySelectedPage()
+        {
+            if(!await this._runes.SetCurrentRunePageAsync(this._selectedRunePage))
+            {
+                await this._dialogCoordinator.ShowMessageAsync(
+                    this, "Failure", "Failed to update the rune page. Did you try updating reserved ones?");
+            }
         }
 
         /// <summary>

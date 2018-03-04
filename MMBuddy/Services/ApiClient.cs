@@ -1,5 +1,6 @@
 ﻿using MMBuddy.Dtos;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -81,5 +82,48 @@ namespace MMBuddy.Services
 
             return null;
         }
+
+        /// <summary>
+        /// Sets a currently selected clientside runepage to a serverside runepage.
+        /// </summary>
+        /// <param name="RunePage">The RunePage to set</param>
+        /// <returns></returns>
+        public static async Task<bool> SetCurrentRunePage(RunePage RunePage)
+        {
+            // First get the current rune page
+            var currentRunePage = await GetCurrentRunePage();
+            if (currentRunePage == null) return false;
+
+            // Check if reserved --> Can't swap stock pages
+            if (currentRunePage.Id >= 50 && currentRunePage.Id <= 54)
+                return false;
+
+            // Now put the new rune page in place of currently selected one
+            HttpResponseMessage response = await _httpClient.PutAsync(
+                $"/lol-perks/v1/pages/{currentRunePage.Id}",
+                RunePage.AsJson()
+            );
+            response.EnsureSuccessStatusCode();
+
+            return true;
+        }
+
+
+        #region Helpers
+
+        /// <summary>
+        /// https://stackoverflow.com/a/44937617
+        /// </summary>
+        /// <param name="o"></param>
+        /// <returns></returns>
+        public static StringContent AsJson(this object o)
+        {
+            var serializerSettings = new JsonSerializerSettings();
+            serializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+            return new StringContent(JsonConvert.SerializeObject(o, serializerSettings),
+                Encoding.UTF8, "application/json");
+        }
+
+        #endregion
     }
 }
