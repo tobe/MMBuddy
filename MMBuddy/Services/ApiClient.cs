@@ -202,15 +202,23 @@ namespace MMBuddy.Services
             ChatRoomName = ChatRoomName.Split('@')[0].ToLower();
             ChatRoomName = HttpUtility.UrlEncode(ChatRoomName); // + & - !
 
-            HttpResponseMessage response = await _httpClient.PostAsync(
-                $"/lol-chat/v1/conversations/{ChatRoomName}/messages",
-                new
-                {
-                    body = Message
-                }.AsJson()
-            );
+            while (true)
+            {
+                // Keep sending POST until it succeeds. This is because
+                // the chat room gets created after the session.
+                HttpResponseMessage response = await _httpClient.PostAsync(
+                    $"/lol-chat/v1/conversations/{ChatRoomName}/messages",
+                    new
+                    {
+                        body = Message
+                    }.AsJson()
+                );
 
-            response.EnsureSuccessStatusCode();
+                if (response.IsSuccessStatusCode)
+                    break;
+
+                await Task.Delay(100);
+            }
 
             return;
         }
